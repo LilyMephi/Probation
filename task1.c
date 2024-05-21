@@ -1,7 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define N 16
+#define N 8
 #define NTREADS 2
 
 //создаем массив который мудем сортировать
@@ -69,16 +69,19 @@ void * mergeSort(void * arg) {
    	merge(left,mid,right);
    	
    }
-   pthread_exit(NULL);
+  // pthread_exit(0);
+  return NULL;
 }
+
 
 int main(int argc, char *argv[])
 {
 	pthread_t tid[NTREADS]; // идентификатор потока 
 	Range r[NTREADS]; // создаем для каждого потока свой ранг для массива
-	int size = N / NTREADS; // размер массива в каждом потоке
+	int size = N / NTREADS; // размер массива в каждом потоке 8
 
 	// заполняем массив рандомными значениями
+	srand(time(NULL));
   	for(int i = 0; i < N; ++i){
   		arr[i] = rand()%100;
   		printf("%d ",arr[i]);
@@ -93,18 +96,19 @@ int main(int argc, char *argv[])
 			perror("Failed to create thread");
 		}
 	} 
-	for(int i = 0; i < N/2; ++i){
+	for(int i = 0; i < NTREADS; ++i){
 		//Ждем окончание работы потока
-		if(pthread_join(tid[i],NULL) != 0) { perror("Failed to join thread");}
+		pthread_join(tid[i],NULL);
+		//if(pthread_join(tid[i],NULL) != 0) { perror("Failed to join thread");}
 		}
 	// соединаям отсортированные по потокам части массива
-	Range rf = {0, N-1};
-  	mergeSort(&rf);
-  	
+	Range rfinal = {0, N-1};
+  	mergeSort(&rfinal);
   	//выводим отсортированный массив
   	for(int i = 0; i < N; ++i){
   		printf("%d ",arr[i]);
   	}
+  	
   	printf("\n");
   	return 0;
 }
