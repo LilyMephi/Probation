@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
        		strcat(strnonopt, ".");
  
    	}else{
-   		strcat(stropt, "non.");
+   		strcat(strnonopt, "non.");
    	}
    	if(flag == 0){
    		printf("%s %s\n", stropt,strnonopt);
