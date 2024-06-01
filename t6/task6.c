@@ -10,7 +10,7 @@
 
 int main(int argc, char *argv[])
 {
-	if(argc != 2) {printf("Wrong arguments!\n Use: ./nameprg <filename>\n"); return 1;}
+	if(argc != 2) {printf("Wrong arguments!\n Use: ./task6 <filename>\n"); return 1;}
 	
 	char *date;
 	int ret;
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
        		printf("User has all rights\n");
        }
        
-       if(sb.st_mode & S_IRUSR){l
+       if(sb.st_mode & S_IRUSR){
        		printf("User can read\n");
        }
        
