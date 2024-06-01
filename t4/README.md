@@ -2,3 +2,7 @@
 Программа принимает опции -m -c -s -t, а также
 --elbrus=[1c+, 2c+, 2c3, 4c, 8c, 16c] и любое количество строк не-опций (без
 символов - и -- перед ними).
+Пример ввода:
+  ./task4 -m -c --elbrus=1c+ help
+Вывод:
+  Options are correct: m, c, elbrus=1c+,  non-options: help .
