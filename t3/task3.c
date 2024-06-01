@@ -9,16 +9,21 @@ int compare(const void *a, const void *b) {
 int main(int argc, char *argv[])
 {
 	if( argc != 4){
-		printf("Неверное количество аргументов");
+		printf("Неверное количество аргументов используйте\n");
+		printf("./prg <inputfile> <outputfile> <sorting>\n");
+		printf("sorting:\n");
+		printf("0-не сортировать\n");
+		printf("1-быстрая сортировка\n");
+		return -1;
 	}
 	FILE *fin, *fout;
 	if ( (fin = fopen(argv[1],"r")) == NULL){
-		printf("НЕ получилось открытьфайл для чтения");
+		printf("НЕ получилось открытьфайл для чтения\n");
 		return -1;
 	}
 	
 	if ( (fout = fopen(argv[2],"w")) == NULL){
-		printf("НЕ получилось открытьфайл для записи");
+		printf("НЕ получилось открытьфайл для записи\n");
 		return -1;
 	}
 	char *line = NULL;
@@ -27,7 +32,7 @@ int main(int argc, char *argv[])
         int num_lines = 0;
         
         char *lines[MAX_LINE];
-	while(r(ead = getline(&line,&len,fin)) != -1){
+	while((read = getline(&line,&len,fin)) != -1){
 		if(!strcmp(line,"\n")) continue;
 		lines[num_lines] = strdup(line);
 		num_lines++;
@@ -35,6 +40,7 @@ int main(int argc, char *argv[])
 	int sort_method = atoi(argv[3]);
 	
 	switch(sort_method){
+		case 0: break;
 		case 1:
 			 qsort(lines, num_lines, sizeof(char *), compare);
            		 break;
